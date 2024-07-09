@@ -14,39 +14,38 @@ import {
 } from "reactstrap"
 
 /* importaciones */
-import ContenidoInicioFragment from "./fragments/ContenidoInicioFragment"
+import Inicio from "./Inicio.jsx";
+import Destacados from "./Destacados.jsx";
+import Acerca from "./Acerca.jsx";
+import NavBarFragment from "./fragments/NavBarFragment.jsx";
 
 /* component: view */
 function App() {
+   const [menu, setMenu] = useState('inicio') //inicio- destacados
+
+  const handleChangeMenuDestacado = () => {
+     setMenu('destacados')
+  }
   return (
     <>
         <Container>
-          <Row>
-            <Col md="12" xs="12">
-              <Nav pills className="mt-2">
-                <NavItem>
-                  <NavLink
-                      active
-                      href="#"
-                  >
-                    Link
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink href="#">
-                    Link
-                  </NavLink>
-                </NavItem>
-              </Nav>
-            </Col>
-          </Row>
-
+        <Row>
+        <NavBarFragment
+            handleChangeMenuDestacado={handleChangeMenuDestacado}
+            setMenu={setMenu}
+        />
+        </Row>
           <Row className="mt-2">
-            <Col md="12" xs="12">
-              {/* Añadir una card pero como fragmento */}
-              {/* ContenidoInicioFragment.jsx */}
-              <ContenidoInicioFragment />
-            </Col>
+            {menu === 'inicio' && <>
+              <Inicio/>
+            </>}
+            {menu === 'destacados' && <>
+              <Destacados/>
+            </>}
+            {menu === 'acerca' && <>
+              <Acerca/>
+            </>}
+
           </Row>
         </Container>
     </>
